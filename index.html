@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Célula Raízes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./src/styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="branding">
+      <h1>Célula Raízes</h1>
+      <span class="tagline">Firmados em Cristo</span>
+    </div>
+    <button id="menuToggle" class="menu-toggle" aria-label="Menu">
+      ☰
+    </button>
+    <nav id="mainNav" class="nav">
+      <button data-section="home" class="nav-link active">Início</button>
+      <button data-section="birthdays" class="nav-link">Aniversários</button>
+      <button data-section="agenda" class="nav-link">Agenda</button>
+      <button data-section="schedules" class="nav-link">Escala</button>
+      <button data-section="photos" class="nav-link">Fotos</button>
+      <button data-section="admin" class="nav-link nav-link-admin">Admin</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- PÚBLICO: INÍCIO -->
+    <section id="section-home" class="section active">
+      <div class="hero">
+        <h2>Célula Raízes</h2>        
+      </div>
+
+      <!-- Navegação rápida (cards) -->
+      <section class="home-nav-grid" aria-label="Navegação rápida">
+        <button class="home-nav-card" data-section="birthdays">
+          <span class="home-nav-icon">🎉</span>
+          <h3>Aniversariantes</h3>
+          <p>Celebre com quem faz aniversário.</p>
+        </button>
+        <button class="home-nav-card" data-section="agenda">
+          <span class="home-nav-icon">📅</span>
+          <h3>Agenda</h3>
+          <p>Próximos eventos e reuniões.</p>
+        </button>
+        <button class="home-nav-card" data-section="schedules">
+          <span class="home-nav-icon">👥</span>
+          <h3>Escala</h3>
+          <p>Funções de cada célula.</p>
+        </button>
+        <button class="home-nav-card" data-section="photos">
+          <span class="home-nav-icon">📷</span>
+          <h3>Fotos</h3>
+          <p>Galeria de fotos da célula.</p>
+        </button>
+      </section>
+
+      <!-- Versículos em destaque -->
+      <section class="verses" aria-label="Versículos do tema">
+        <article class="verse-card">
+          <h4>Jeremias 17:7–8</h4>
+          <p class="verse-text">
+            “Bendito o homem que confia no Senhor, e cuja confiança é o Senhor. Porque será
+            como a árvore plantada junto às águas, que estende as suas raízes para o ribeiro,
+            e não receia quando vem o calor, mas a sua folha fica verde; e no ano de sequidão
+            não se afadiga, nem deixa de dar fruto.”
+          </p>
+        </article>
+        <article class="verse-card">
+          <h4>Colossenses 2:6–7</h4>
+          <p class="verse-text">
+            “Como, pois, recebestes o Senhor Jesus Cristo, assim também andai nele; arraigados
+            e edificados nele, e confirmados na fé, assim como fostes ensinados, abundando em
+            ação de graças.”
+          </p>
+        </article>
+      </section>
+
+      <section id="birthdayBanner" class="banner hidden">
+        <h3>Aniversariantes deste mês</h3>
+        <ul id="birthdayBannerList"></ul>
+      </section>
+    </section>
+
+    <!-- PÚBLICO: ANIVERSÁRIOS -->
+    <section id="section-birthdays" class="section">
+      <h2>Aniversários</h2>
+      <p class="section-description">
+        Veja os aniversariantes deste mês e do próximo.
+      </p>
+      <ul id="birthdayList" class="card-list"></ul>
+    </section>
+
+    <!-- PÚBLICO: AGENDA -->
+    <section id="section-agenda" class="section">
+      <h2>Agenda</h2>
+      <p class="section-description">
+        Próximos eventos e encontros da célula.
+      </p>
+      <ul id="agendaList" class="card-list"></ul>
+    </section>
+
+    <!-- PÚBLICO: ESCALAS -->
+    <section id="section-schedules" class="section">
+      <h2>Escala da Célula</h2>
+      <p class="section-description">
+        Acompanhe as próximas escalas de serviço.
+      </p>
+      <div id="scheduleList" class="card-list"></div>
+    </section>
+
+    <!-- PÚBLICO: FOTOS -->
+    <section id="section-photos" class="section">
+      <h2>Galeria de Fotos</h2>
+      <p class="section-description">
+        Momentos marcantes da Célula Raízes.
+      </p>
+      <div id="photoGrid" class="photo-grid"></div>
+    </section>
+
+    <!-- ADMIN -->
+    <section id="section-admin" class="section">
+      <h2>Área Administrativa</h2>
+
+      <!-- LOGIN -->
+      <div id="adminLogin" class="card">
+        <h3>Login do Admin</h3>
+        <form id="loginForm" autocomplete="on">
+          <label>
+            E-mail
+            <input type="email" id="loginEmail" required />
+          </label>
+          <label>
+            Senha
+            <input type="password" id="loginPassword" required minlength="6" />
+          </label>
+          <button type="submit" class="btn-primary">Entrar</button>
+          <p id="loginError" class="error-message"></p>
+        </form>
+      </div>
+
+      <!-- PAINEL ADMIN -->
+      <div id="adminDashboard" class="admin-dashboard hidden">
+        <div class="admin-header">
+          <span id="adminUserEmail"></span>
+          <button id="logoutBtn" class="btn-secondary">Sair</button>
+        </div>
+
+        <nav class="admin-nav">
+          <button data-admin-tab="content" class="admin-tab-link active">
+            Conteúdo Público
+          </button>
+          <button data-admin-tab="members" class="admin-tab-link">
+            Membros
+          </button>
+          <button data-admin-tab="attendance" class="admin-tab-link">
+            Presenças
+          </button>
+          <button data-admin-tab="reports" class="admin-tab-link">
+            Relatórios
+          </button>
+        </nav>
+
+        <!-- ABA: CONTEÚDO PÚBLICO -->
+        <div id="admin-tab-content" class="admin-tab active">
+          <h3>Agenda</h3>
+          <form id="agendaForm" class="inline-form">
+            <input type="date" id="agendaDate" required />
+            <input type="text" id="agendaDescription" placeholder="Descrição" required />
+            <button type="submit" class="btn-primary">Adicionar</button>
+          </form>
+          <ul id="adminAgendaList" class="card-list admin-list"></ul>
+
+          <h3>Escalas</h3>
+          <form id="scheduleForm" class="stacked-form">
+            <label>
+              Data da Célula
+              <input type="date" id="scheduleDate" required />
+            </label>
+            <label>
+              Quebra-gelo
+              <select id="scheduleIcebreaker"></select>
+            </label>
+            <label>
+              Louvor
+              <select id="scheduleWorship"></select>
+            </label>
+            <label>
+              Lanche
+              <select id="scheduleSnack"></select>
+            </label>
+            <label>
+              Mídia
+              <select id="scheduleMedia"></select>
+            </label>
+            <button type="submit" class="btn-primary">Salvar Escala</button>
+          </form>
+          <ul id="adminScheduleList" class="card-list admin-list"></ul>
+
+          <h3>Fotos</h3>
+          <form id="photoUploadForm" class="stacked-form">
+            <input type="file" id="photoFile" accept="image/*" required />
+            <button type="submit" class="btn-primary">Enviar Foto</button>
+            <p id="photoUploadError" class="error-message"></p>
+          </form>
+          <div id="photoPreview" class="photo-preview"></div>
+        </div>
+
+        <!-- ABA: MEMBROS -->
+        <div id="admin-tab-members" class="admin-tab">
+          <h3>Membros</h3>
+          <form id="memberForm" class="stacked-form">
+            <input type="hidden" id="memberId" />
+            <label>
+              Nome completo
+              <input type="text" id="memberName" required />
+            </label>
+            <label>
+              Tipo
+              <select id="memberType" required>
+                <option value="Membro">Membro</option>
+                <option value="FA">FA</option>
+                <option value="Visitante">Visitante</option>
+              </select>
+            </label>
+            <label>
+              Data de nascimento
+              <input type="date" id="memberBirthDate" required />
+            </label>
+            <label>
+              Ajuste de aniversário (opcional)
+              <input type="date" id="memberBirthdayOverride" />
+            </label>
+            <label>
+              Batismo
+              <select id="memberBaptism" required>
+                <option value="Videira">Videira</option>
+                <option value="Outra Igreja">Outra Igreja</option>
+                <option value="Nenhum">Nenhum</option>
+              </select>
+            </label>
+            <label>
+              Encontro com Deus
+              <select id="memberEncounter" required>
+                <option value="true">Sim</option>
+                <option value="false">Não</option>
+              </select>
+            </label>
+            <fieldset class="courses">
+              <legend>Cursos</legend>
+              <label><input type="checkbox" value="Ceifeiros" /> Ceifeiros</label>
+              <label><input type="checkbox" value="Maturidade" /> Maturidade</label>
+              <label><input type="checkbox" value="CTL" /> CTL</label>
+              <label><input type="checkbox" value="Pastoral" /> Pastoral</label>
+            </fieldset>
+            <button type="submit" class="btn-primary">Salvar Membro</button>
+            <p id="memberFormError" class="error-message"></p>
+          </form>
+
+          <table class="table" id="memberTable">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Tipo</th>
+                <th>Nascimento</th>
+                <th>Batismo</th>
+                <th>Encontro</th>
+                <th>Cursos</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <!-- ABA: PRESENÇAS -->
+        <div id="admin-tab-attendance" class="admin-tab">
+          <h3>Presenças</h3>
+          <form id="attendanceForm" class="stacked-form">
+            <label>
+              Data da célula
+              <input type="date" id="attendanceDate" required />
+            </label>
+            <div id="attendanceMembers" class="attendance-list"></div>
+
+            <label>
+              Visitantes (um por linha)
+              <textarea id="attendanceVisitors" rows="3" placeholder="Nome do visitante"></textarea>
+            </label>
+            <button type="submit" class="btn-primary">Salvar Presenças</button>
+            <p id="attendanceError" class="error-message"></p>
+          </form>
+        </div>
+
+        <!-- ABA: RELATÓRIOS -->
+        <div id="admin-tab-reports" class="admin-tab">
+          <h3>Relatórios</h3>
+          <form id="reportFilterForm" class="inline-form">
+            <label>
+              Início
+              <input type="date" id="reportStart" />
+            </label>
+            <label>
+              Fim
+              <input type="date" id="reportEnd" />
+            </label>
+            <button type="submit" class="btn-secondary">Atualizar</button>
+          </form>
+
+          <div class="reports-grid">
+            <div class="card">
+              <h4>Presença por Encontro</h4>
+              <canvas id="attendanceByMeetingChart"></canvas>
+            </div>
+            <div class="card">
+              <h4>Média Geral de Presença</h4>
+              <p id="overallAttendanceAvg"></p>
+            </div>
+            <div class="card">
+              <h4>Presença por Membro</h4>
+              <canvas id="attendanceByMemberChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Supabase: injete URL e anon key antes do script do app (veja README) -->
+  <script>
+    // window.SUPABASE_URL = "https://SEU-PROJETO.supabase.co";
+    // window.SUPABASE_ANON_KEY = "SEU_ANON_KEY_AQUI";
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/supabase.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" crossorigin="anonymous"></script>
+  <script type="module" src="./src/app.js"></script>
+</body>
+</html>
