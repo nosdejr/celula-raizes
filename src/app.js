@@ -7,8 +7,8 @@
 // ---------------------------------------------------------------------------
 
 // TODO: substitua por valores INJETADOS em tempo de build/deploy
-const SUPABASE_URL = window.SUPABASE_URL || "https://SEU-PROJETO.supabase.co";
-const SUPABASE_ANON_KEY = window.SUPABASE_ANON_KEY || "SEU_ANON_KEY_AQUI";
+const SUPABASE_URL = window.SUPABASE_URL || "https://sxvdzghltsmsvjjorvoc.supabase.co";
+const SUPABASE_ANON_KEY = window.SUPABASE_ANON_KEY || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN4dmR6Z2hsdHNtc3Zqam9ydm9jIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA2Njg0NzIsImV4cCI6MjA4NjI0NDQ3Mn0.josowwt8D1cYhnotJz93vggUuQPv3iNIMBcSpUdrdMM";
 
 // Inicializa cliente Supabase
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -1001,4 +1001,5 @@ async function loadAdminData() {
     loadReports(),
   ]);
 }
+
 
