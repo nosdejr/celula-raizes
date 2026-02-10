@@ -1,4 +1,3 @@
-alert("JS carregou");
 // Célula Raízes - SPA estática com Supabase
 // ---------------------------------------------------------------------------
 // IMPORTANTE:
@@ -1002,5 +1001,6 @@ async function loadAdminData() {
     loadReports(),
   ]);
 }
+
 
 
